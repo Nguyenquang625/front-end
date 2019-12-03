@@ -1,0 +1,12 @@
+<swal
+  #setMemberItemSwal
+  title="Confirm set Member!"
+  text="Are you sure you want to set {{member.name}} as normal Member?"
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="handleRefusalToSetEmail($event)"
+  (confirm)="setMember(member)"
+>
+</swal>
+<button [swal]="setMemberItemSwal" class="btn btn-danger btn-link btn-xs"><i class="fas fa-user"></i></button>

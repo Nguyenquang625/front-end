@@ -1,0 +1,33 @@
+<div class="component">
+        <div *ngIf="group; else formDrivenTemplate" [formGroup]="group">
+            <div *ngIf="title" class="label">
+                <span class="label1 title">{{title}}</span>
+                <span class="danger1 error" *ngIf="!error; else error_server">
+                </span>
+                <ng-template #error_server>
+                <span class="danger1 error">
+                    {{error}}
+                </span>
+                </ng-template>
+            </div>
+            <div class="input">
+                <input [class.disabled]="disabled" type={{type}} [formControlName]="form_control_name"
+                       tabindex={{tab_index}}/>
+            </div>
+        </div>
+        <ng-template #formDrivenTemplate>
+            <div>
+                <div *ngIf="title || error" class="label">
+                    <span class="label1 title">{{title}}</span>
+                    <span class="danger1 error">{{error}}</span>
+                </div>
+                <div class="input">
+                    <input tabindex="{{tab_index}}" [placeholder]="placeholder" [class.disabled]="disabled" type={{type}} value="{{value}}"
+                           (input)="value=$event.target.value"/>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    
+  
+  

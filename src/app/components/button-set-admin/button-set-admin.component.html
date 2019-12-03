@@ -1,0 +1,12 @@
+<swal
+  #setAdminItemSwal
+  title="Confirm set Admin!"
+  text="Are you sure you want to set {{member.name}} as Admin?"
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="handleRefusalToSetEmail($event)"
+  (confirm)="setAdmin(member)"
+>
+</swal>
+<button [swal]="setAdminItemSwal" class="btn btn-danger btn-link btn-xs"><i class="fas fa-users-cog"></i></button>

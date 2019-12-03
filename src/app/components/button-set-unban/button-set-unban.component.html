@@ -1,0 +1,12 @@
+<swal
+  #setUnBANItemSwal
+  title="Confirm set Admin!"
+  text="Are you sure you want to re-active user {{member.name}}?"
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="handleRefusalToSetEmail($event)"
+  (confirm)="setUnban(member)"
+>
+</swal>
+<button [swal]="setUnBANItemSwal" class="btn btn-danger btn-link btn-xs"><i class="far fa-dot-circle"></i></button>

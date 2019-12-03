@@ -1,0 +1,15 @@
+a {
+    cursor: pointer;
+}
+.wrap-progress{
+    width: 100px;
+}
+.wrap-progress .progress{
+    height: 10px;
+    width: 100%;
+    background: #ddd;
+}
+.wrap-progress .progress .bar {
+    height: 10px;
+    background: #009200;
+}

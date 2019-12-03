@@ -1,0 +1,12 @@
+<swal
+  #setBANItemSwal
+  title="Confirm set Admin!"
+  text="Are you sure you want to temporary BAN {{member.name}} from system ?"
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="handleRefusalToSetEmail($event)"
+  (confirm)="setBan(member)"
+>
+</swal>
+<button [swal]="setBANItemSwal" class="btn btn-danger btn-link btn-xs"><i class="fas fa-ban"></i></button>

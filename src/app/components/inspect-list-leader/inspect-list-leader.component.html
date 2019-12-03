@@ -1,0 +1,55 @@
+<div class="card regular-table-with-color" style="min-width: 820px;">
+  <div class="card-header ">
+    <h4 class="card-title">List</h4>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th width='100px'>Title</th>
+          <th width='200px'>Line Location</th>
+          <th width='200px'>Line Condition</th>
+          <th width='200px'>description</th>
+          <th width='200px'>Equipment Required</th>
+          <th>Start/End Date</th>
+          <th>option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let listInspection of (listInspections.insI | paginate: { id: 'inspectionList', itemsPerPage: 3, currentPage: page })">
+          <td>{{listInspection.id}}</td>
+          <td>
+            <app-view-work-list
+              typeModal = 'viewworks'
+              [listInspection] = 'listInspection'
+              ></app-view-work-list>
+          </td>
+          <td>{{listInspection.line_location}}</td>
+          <td>{{listInspection.line_condition}}</td>
+          <td>{{listInspection.description}}</td>
+          <td>{{listInspection.equipment_require}}</td>
+
+          <td>{{listInspection.start_date | date:'MMMM dd, yyyy' }} -
+            {{listInspection.end_date | date:'MMMM dd, yyyy' }}</td>
+
+          <td>
+            <app-button-add-work-detail 
+            typeModal='insert' 
+            [inspection_id]='listInspection.id'
+            >
+            </app-button-add-work-detail>
+          </td>
+        </tr>
+        <tr *ngIf="!listInspections">
+          <td class="text-center" colspan="6">None data</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!!listInspections.length" class="col-md-12 container">
+    <pagination-controls id="inspectionList" (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

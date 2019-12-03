@@ -1,0 +1,4 @@
+.ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  margin-bottom: 1px !important;
+}

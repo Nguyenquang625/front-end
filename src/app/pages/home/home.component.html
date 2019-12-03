@@ -1,0 +1,13 @@
+<p>home works!</p>
+<div *ngFor="let item of info">
+    <p>{{item.id}}   {{item.username}}</p>
+</div>
+<form [formGroup]="formInsert" (ngSubmit)="onInsertSubmit()">
+    <label>Username:</label>
+    <input type="text" formControlName="username"><br><br>
+    <label>Password:</label>
+    <input type="password" formControlName="password">
+    <button type="submit" [disabled]="!formInsert.valid">
+        Send
+    </button>
+</form>
