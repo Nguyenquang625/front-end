@@ -19,4 +19,7 @@ export class NoAuthService {
     return this.http.get(`${environment.API_SERVER_URL}/noauth/getstatus`);
   }
 
+  getOwners(): Observable<any> {
+    return this.http.get(`${environment.API_SERVER_URL}/noauth/getowners`);
+  }
 }

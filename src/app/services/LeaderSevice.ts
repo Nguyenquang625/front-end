@@ -41,4 +41,30 @@ export class LeaderService {
       headers: this.setHeaders()
     });
   }
+  updateProgress(body): Observable<any> {
+    return this.http.put(`${environment.API_SERVER_URL}/owner/updateprogress`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  getDataNotify(): Observable<any> {
+    return this.http.get(`${environment.API_SERVER_URL}/owner/getdatanotify`, {
+      headers: this.setHeaders()
+    });
+  }
+  sendReport(body): Observable<any> {
+    return this.http.post(`${environment.API_SERVER_URL}/owner/sendreport`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  getInspectionByMultiCondtion(searchInfo): Observable<any> {
+    const query = `title=${searchInfo.title}&line_location=${searchInfo.line_location}&line_condition=${searchInfo.line_condition}`;
+    return this.http.get(`${environment.API_SERVER_URL}/owner/getinspectionbymulticondtion?${query}`, {
+      headers: this.setHeaders()
+    });
+  }
+  getTeam(): Observable<any> {
+    return this.http.get(`${environment.API_SERVER_URL}/owner/getteam`, {
+      headers: this.setHeaders()
+    });
+  }
 }

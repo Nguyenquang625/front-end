@@ -42,7 +42,14 @@
         <tr
           *ngFor="let inspection of (inspections | paginate: { id: 'inspectionList', itemsPerPage: 3, currentPage: page })">
           <td>{{inspection.id}}</td>
-          <td>{{inspection.title}}</td>
+          <td>
+            <app-report-form
+            typeModal = 'openReport'
+            [inspection] = 'inspection'
+            (SendValueInsStatus) = 'newSendValueInsStatus($event)'
+            (sendValueInsStatusClose) = 'newSendValueInsStatusClose($event)'
+            ></app-report-form>
+          </td>
           <td>{{inspection.line_location}}</td>
           <td>{{inspection.line_condition}}</td>
           <td>{{inspection.description}}</td>

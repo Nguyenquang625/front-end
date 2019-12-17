@@ -10,6 +10,9 @@ import { MemberComponent } from './pages/member/member.component';
 import { LeaderComponent } from './pages/leader/leader.component';
 import { SetLevelComponent } from './pages/set-level/set-level.component';
 import { MemberChatComponent } from './components/member-chat/member-chat.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { AddUserLeaderComponent } from './pages/add-user-leader/add-user-leader.component';
 
 const routes: Routes = [
   {
@@ -36,7 +39,13 @@ const routes: Routes = [
     path: 'admin-set-level', component: SetLevelComponent,
   },
   {
+    path: 'admin-add-user', component: AddUserComponent,
+  },
+  {
     path: 'leader', component: LeaderComponent,
+  },
+  {
+    path: 'add-user-leader', component: AddUserLeaderComponent,
   },
   {
     path: 'member', component: MemberComponent,

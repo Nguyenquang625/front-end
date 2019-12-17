@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeaderService } from 'src/app/services/LeaderSevice';
+import SocketService from '../../services/socketService';
 
 @Component({
   selector: 'app-leader',
@@ -9,7 +10,14 @@ import { LeaderService } from 'src/app/services/LeaderSevice';
 })
 export class LeaderComponent implements OnInit {
   listInspections : any = [];
-  name : string ;
+  notification:any =[];
+  isChecked= true;
+
+  
+  dataSearch : any ={ title : '', line_location: '', line_condition: ''}
+  title : any ='';
+  line_location : any ='';
+  line_condition : any ='';
 
   constructor(
     private router: Router,
@@ -17,15 +25,9 @@ export class LeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.checkLogin();
     this.checkAuth();
     this.getInsL();
-    this.name = localStorage.getItem('name');
-  }
-  checkLogin(){
-    if(!localStorage.getItem('name')||!localStorage.getItem('token')||!localStorage.getItem('level')){
-      this.router.navigate(['login'])
-    }
+    this.getNoti();
   }
   checkAuth(){
     if(localStorage.getItem('level') === '3'){
@@ -41,7 +43,7 @@ export class LeaderComponent implements OnInit {
   getInsL(){
     this.leaderService.getOwnerInfo().subscribe(data=>{
       if(data.message === 'get_ins_matched'){
-        this.listInspections = data.data[0];
+        this.listInspections = data.data;
       }
     })
   }
@@ -55,5 +57,45 @@ export class LeaderComponent implements OnInit {
     if(!localStorage.getItem('name')||!localStorage.getItem('token')||!localStorage.getItem('level')){
       this.router.navigate(['login']);
     }
+  }
+  
+  moveToAddUser(){
+    this.router.navigate(['admin-add-user']);
+  }
+  getNoti(){
+    this.leaderService.getDataNotify().subscribe(data=>{
+      if(data.message === 'get_success'){
+        this.notification = data.data;
+      }
+    })
+  }
+  checkedNotify(){
+    this.isChecked = !this.isChecked;
+  }
+
+  getListMembers(dataSearch){
+    this.leaderService.getInspectionByMultiCondtion(dataSearch).subscribe(data=>{
+      if(data.message === 'filter_success'){
+        this.listInspections = data.data;
+        console.log(this.listInspections);
+      }
+    })
+  }
+  
+  updateFilter() {
+    this.dataSearch = { title: this.title, line_location: this.line_location, line_condition: this.line_condition};
+    this.getListMembers(this.dataSearch);
+  }
+  onChangeTitle(title): void{
+    this.title = title;
+    this.updateFilter();
+  }
+  onChangeLineLocation(line_location): void{
+    this.line_location = line_location;
+    this.updateFilter();
+  }
+  onChangeLineCondition(line_condition): void{
+    this.line_condition = line_condition;
+    this.updateFilter();
   }
 }

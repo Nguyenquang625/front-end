@@ -48,4 +48,11 @@ export class ViewWorkListComponent implements OnInit {
       }
     })
   }
+  editWorkDetails(data){
+    this.worksDetails.map( worksDetail => {
+      if(worksDetail.id == data.id){
+        worksDetail.progress = data.progress;
+      }
+    });
+  }
 }

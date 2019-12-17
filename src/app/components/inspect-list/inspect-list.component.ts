@@ -16,7 +16,9 @@ export class InspectListComponent implements OnInit {
   @Output() sendLineConditionValue = new EventEmitter<any>();
   @Output() sendTeamValue = new EventEmitter<any>();
   @Output() sendStatusValue = new EventEmitter<any>();
-  
+
+  @Output() sendValueInsStatus = new EventEmitter<any>();
+  @Output() SendValueInsStatusClose = new EventEmitter<any>();
   
   page: any;
   start_date: any;
@@ -99,5 +101,11 @@ export class InspectListComponent implements OnInit {
   filterByStatus(value){
     this.status = value ? value.id : 0;
     this.sendStatusValue.emit(this.status);
+  }
+  newSendValueInsStatus(data){
+    this.sendValueInsStatus.emit(data);
+  }
+  newSendValueInsStatusClose(data){
+    this.SendValueInsStatusClose.emit(data);
   }
 }

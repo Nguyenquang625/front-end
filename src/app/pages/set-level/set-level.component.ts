@@ -10,7 +10,15 @@ import { Router } from '@angular/router';
 })
 export class SetLevelComponent implements OnInit {
   members: any =[];
+  filteredMembers: any =[];
+  temporaryFilteredMembers: any =[];
   name : string ;
+  
+  dataSearch : any ={ name : ''}
+
+  nameF : any ='';
+  team_id: number;
+  level: number;
 
   
   constructor(
@@ -27,6 +35,8 @@ export class SetLevelComponent implements OnInit {
     this.adminService.getAllMembers().subscribe(data=>{
       if(data.message === 'get_all_members_successs'){
         this.members = data.data;
+        this.filteredMembers = data.data;
+        this.temporaryFilteredMembers = data.data;
       }
     });
   }
@@ -38,6 +48,13 @@ export class SetLevelComponent implements OnInit {
     if(!localStorage.getItem('name')||!localStorage.getItem('token')||!localStorage.getItem('level')){
       this.router.navigate(['login']);
     }
+  }
+  updateMemberList(data){
+    this.members.map( member => {
+      if(member.id == data.id){
+        member.team_id = data.team_id;
+      }
+    });
   }
 
   setAdmin($event){
@@ -70,7 +87,7 @@ export class SetLevelComponent implements OnInit {
   }
   setMember($event){
     this.adminService.setMember($event).subscribe(data=>{
-      if(data.message === 'account_has_been_banned'){
+      if(data.message === 'set_member_success'){
         this.members.map( member => {
           if(member.id == $event.id){
             member.level = data.data.level;
@@ -109,5 +126,64 @@ export class SetLevelComponent implements OnInit {
         this.toastr.error(data.message, 'Error')
       }
     })
+  }
+  
+  onChange(){
+    if(!!this.team_id || !!this.level){
+      this.temporaryFilteredMembers = this.filteredMembers;
+      this.temporaryFilteredMembers = this.temporaryFilteredMembers.filter(member =>{
+        if(this.team_id && this.team_id !== member.team_id){
+          return false
+        }
+        if(this.level && this.level !== member.level){
+          return false
+        }
+        return true;
+      })
+    }else{
+      this.filteredMembers = this.members.filter(member =>{
+        if(this.team_id && this.team_id !== member.team_id){
+          return false
+        }
+        if(this.level && this.level !== member.level){
+          return false
+        }
+        return true;
+      })
+      this.temporaryFilteredMembers = this.filteredMembers;
+    }
+  }
+  
+  getListInspection(dataSearch) {
+    this.adminService.getMemberByName(dataSearch).subscribe(data=>{
+      this.filteredMembers = data.data;
+      this.filteredMembers = this.filteredMembers.filter(member =>{
+        if(this.team_id && this.team_id !== member.team_id){
+          return false
+        }
+        if(this.level && this.level !== member.level){
+          console.log(member);
+          return false
+        }
+        return true;
+      })
+      this.temporaryFilteredMembers = this.filteredMembers;
+    })
+  }
+  updateFilter() {
+    this.dataSearch = { name: this.nameF};
+    this.getListInspection(this.dataSearch);
+  }
+  onChangeName(name): void{
+    this.nameF = name;
+    this.updateFilter();
+  }
+  onChangeTeamID(team_id): void{
+    this.team_id = team_id;
+    this.onChange();
+  }
+  onChangeLevel(level): void{
+    this.level = level;
+    this.onChange();
   }
 }

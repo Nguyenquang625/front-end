@@ -83,4 +83,30 @@ export class AdminService {
       headers: this.setHeaders()
     });
   }
+  addUser(body): Observable<any> {
+    return this.http.post(`${environment.API_SERVER_URL}/admin/adduser`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  getMemberByName(searchInfo): Observable<any> {
+    const query = `name=${searchInfo.name}`;
+    return this.http.get(`${environment.API_SERVER_URL}/admin/getmemberbyname?${query}`, {
+      headers: this.setHeaders()
+    });
+  }
+  closeInspection(body): Observable<any> {
+    return this.http.put(`${environment.API_SERVER_URL}/admin/closeinspection`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  reOpenInspection(body): Observable<any> {
+    return this.http.put(`${environment.API_SERVER_URL}/admin/reopeninspection`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  updateUserProfileByAdmin(body): Observable<any> {
+    return this.http.put(`${environment.API_SERVER_URL}/admin/updateuserprofile`,body, {
+      headers: this.setHeaders()
+    });
+  }
 }

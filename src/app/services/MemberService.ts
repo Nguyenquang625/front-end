@@ -21,4 +21,24 @@ export class MemberService {
     }
     return headers;
   }
+  getWorkDetails(): Observable<any> {
+    return this.http.get(`${environment.API_SERVER_URL}/member/getworkdetails`, {
+      headers: this.setHeaders()
+    });
+  }
+  getInspections(): Observable<any> {
+    return this.http.get(`${environment.API_SERVER_URL}/member/getinspections`, {
+      headers: this.setHeaders()
+    });
+  }
+  editWorkDetail(body): Observable<any> {
+    return this.http.put(`${environment.API_SERVER_URL}/member/editworkdetail`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  addWorkNotify(body): Observable<any> {
+    return this.http.post(`${environment.API_SERVER_URL}/member/addworknotify`,body, {
+      headers: this.setHeaders()
+    });
+  }
 }

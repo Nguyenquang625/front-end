@@ -14,6 +14,7 @@ import { NoAuthService } from 'src/app/services/NoAuthService';
 export class InspectEditComponent implements OnInit {
   inspectionForm: FormGroup;
   teams : any = [];
+  owners : any = [];
   @Input() typeModal: string;
   @Input() inspection: any = [];
   @Output() sendValue = new EventEmitter<any>();
@@ -29,6 +30,7 @@ export class InspectEditComponent implements OnInit {
   ngOnInit() {
     this.init();
     this.getTeams();
+    this.getOwners();
   }
   init() {
     this.inspectionForm = this.fb.group({
@@ -40,7 +42,6 @@ export class InspectEditComponent implements OnInit {
       team_id: [],
       start_date: [''],
       end_date: [''],
-      status: [''],
       owner_id: []
     })
   }
@@ -49,11 +50,16 @@ export class InspectEditComponent implements OnInit {
       this.teams = data.data;
     })
   }
+  getOwners(){
+    this.noAuthService.getOwners().subscribe(data=>{
+      this.owners =data.data;
+    })
+  }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     if (this.typeModal === 'update') {
       const { title, line_location, line_condition,
-        description, equipment_require, team_id, start_date, end_date, status,owner_id } = this.inspection;
+        description, equipment_require, team_id, start_date, end_date,owner_id } = this.inspection;
       this.inspectionForm.patchValue({
         title: title,
         line_location: line_location,
@@ -63,18 +69,17 @@ export class InspectEditComponent implements OnInit {
         team_id: team_id,
         start_date: new Date(start_date).toISOString().substring(0, 10),
         end_date: new Date(end_date).toISOString().substring(0, 10),
-        status: status,
         owner_id : owner_id
       });
     }
   }
   submitEdit() {
     const { title, line_location, line_condition,
-      description, equipment_require, team_id, start_date, end_date, status, owner_id } = this.inspectionForm.value;
+      description, equipment_require, team_id, start_date, end_date, owner_id } = this.inspectionForm.value;
     const body = {
       id: this.inspection.id,
       title, line_location, line_condition,
-      description, equipment_require, team_id, start_date, end_date, status, owner_id
+      description, equipment_require, team_id, start_date, end_date, owner_id
     };
     if (this.typeModal === 'update') {
       this.modalRef.hide();

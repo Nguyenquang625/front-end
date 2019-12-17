@@ -15,10 +15,7 @@
         </div>
 
     </div>
-    <div class="body">
-        <button (click) = 'moveToCreate()' >New</button>
-        <a (click) = 'moveToSetLevel()'>Set Level</a>
-    </div>
+    <app-menu-bar-admin></app-menu-bar-admin>
     <app-inspect-list
         [inspections] = 'temporaryFilteredInspections'
         (sendValueUpdate) = 'updateInspect($event)'
@@ -29,5 +26,7 @@
         (sendLineConditionValue) = "onChangeLineCondition($event)"
         (sendTeamValue) = "onChangeTeam($event)"
         (sendStatusValue) = "onChangeStatus($event)"
+        (sendValueInsStatus) = "newSendValueInsStatus($event)"
+        (SendValueInsStatusClose) = "newSendValueInsStatusClose($event)"
     ></app-inspect-list>
 </div>

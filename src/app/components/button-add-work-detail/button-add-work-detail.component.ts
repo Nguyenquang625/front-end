@@ -17,6 +17,7 @@ export class ButtonAddWorkDetailComponent implements OnInit {
 
   @Input() typeModal: string;
   @Input() inspection_id : any;
+  @Input() inspection : any;
 
   modalRef : BsModalRef;
   constructor(
@@ -45,7 +46,12 @@ export class ButtonAddWorkDetailComponent implements OnInit {
     })
   }
   openModal(template : TemplateRef<any>){
-    this.modalRef = this.modalService.show(template);
+    console.log(this.inspection)
+    if(this.inspection.status === 3){
+      this.toastr.error('Project has been shut down by admin, you can no longer add work');
+    }else{
+      this.modalRef = this.modalService.show(template);
+    }
   }
   submitInsert(){
     if(this.typeModal ==='insert'){

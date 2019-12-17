@@ -1,0 +1,65 @@
+<a *ngIf="typeModal === 'openReport'" (click)='openModal(template)'>
+    
+    <span style="color: #436594;">{{inspection.title}}</span>
+</a>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">Report Form </h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card regular-table-with-color">
+            <div class="card-header ">
+                <h4 class="card-title">Overall percent</h4>
+                <div class="wrap-overall">
+                    <div class="overall">
+                        <div class="bar" [ngStyle]="{'width.%': overallPercent}"></div>
+                    </div>
+                </div>
+                <div>
+                    <app-button-close-case
+                    [inspection] = 'inspection'
+                    (sendValueInsStatus) = 'newSendValueInsStatus($event)'
+                    (sendValueInsStatusClose) = 'newSendValueInsStatusClose($event)'
+                    ></app-button-close-case>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let worksDetail of (worksDetails | paginate: { id: 'workList', itemsPerPage: 4, currentPage: page })">
+                            <td>{{worksDetail.id}}</td>
+                            <td>{{worksDetail.title}}</td>
+                            <td>{{worksDetail.description}}</td>
+                            <td>
+                                <!-- <p><ngb-progressbar [showValue]="true" type="info" [value]="50"></ngb-progressbar></p> -->
+                                <div class="wrap-progress">
+                                    <div class="progress">
+                                        <div class="bar" [ngStyle]="{'width.%': worksDetail.progress}"></div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!worksDetails">
+                            <td class="text-center" colspan="6">None data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="!!worksDetails.length" class="col-md-12 container">
+                <pagination-controls id="workList" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</ng-template>

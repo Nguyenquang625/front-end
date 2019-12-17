@@ -1,5 +1,6 @@
-<a *ngIf="typeModal === 'viewworks'" (click)='openModal(template)'>
-    {{listInspection.title}}
+<a *ngIf="typeModal === 'viewworks'"  (click)='openModal(template)'>
+    
+    <span class="view-work">{{listInspection.title}}</span>
 </a>
 <ng-template #template>
     <div class="modal-header">
@@ -9,7 +10,12 @@
         </button>
     </div>
     <div class="modal-body">
-
+        <div>
+            <app-button-send-report
+            [data] = 'worksDetails'
+            [inspection] = 'listInspection'
+            ></app-button-send-report>
+        </div>
         <div class="card regular-table-with-color">
             <div class="card-header ">
                 <h4 class="card-title">List</h4>
@@ -23,11 +29,12 @@
                             <th>Description</th>
                             <th>In charge</th>
                             <th>progress</th>
+                            <th>Option</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let worksDetail of (worksDetails | paginate: { id: 'workList', itemsPerPage: 3, currentPage: page })">
+                            *ngFor="let worksDetail of (worksDetails | paginate: { id: 'workList', itemsPerPage: 4, currentPage: page })">
                             <td>{{worksDetail.id}}</td>
                             <td>{{worksDetail.title}}</td>
                             <td>{{worksDetail.description}}</td>
@@ -44,10 +51,16 @@
                                     </div>
                                 </div>
                             </td>
+                            <td>
+                                <app-button-evaluate-progress
+                                typeModal = 'evaluate'
+                                [worksDetail] = 'worksDetail'
+                                (sendValueAdjustProgress) = 'editWorkDetails($event)'
+                                ></app-button-evaluate-progress>
+                            </td>
                         </tr>
                         <tr *ngIf="!worksDetails">
                             <td class="text-center" colspan="6">None data</td>
-                            <td></td>
                         </tr>
                     </tbody>
                 </table>

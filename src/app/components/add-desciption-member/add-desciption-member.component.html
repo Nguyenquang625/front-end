@@ -1,0 +1,33 @@
+<a *ngIf="typeModal === 'editWork'" (click)='openModal(template)'>
+    <span class="add-desctiption" style="color: #436594;cursor: pointer;">{{workDetail.title}}</span>
+</a>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">Add/Update work</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="workDetailForm" (ngSubmit)="submitEdit()">
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-12 col-form-label message-note"
+                        style="font-size: 15px; font-weight: bold">{{workDetail.title}}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Description</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <textarea type="text" formControlName="description"
+                            style="width: 100%;height: 150px;">{{workDetail.description}}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info">Submit</button>
+        </form>
+    </div>
+</ng-template>

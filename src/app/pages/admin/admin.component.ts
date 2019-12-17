@@ -92,13 +92,6 @@ export class AdminComponent implements OnInit {
   //   }
   //   return headers;
   // }
-  moveToCreate(){
-    this.router.navigate(['admin-new-inspect']);
-  }
-  moveToSetLevel(){
-    this.router.navigate(['admin-set-level']);
-  }
-
   getInspection(){
   //  let headers = this.setHeaders();
     this.adminService.getInspectation().subscribe(data=>{
@@ -134,6 +127,7 @@ export class AdminComponent implements OnInit {
         }
         return true;
       })
+      this.temporaryFilteredInspections = this.filteredInspections;
     }
   }
 
@@ -176,5 +170,27 @@ export class AdminComponent implements OnInit {
   onChangeStatus(status): void{
     this.status = status;
     this.onChange();
+  }
+
+
+  newSendValueInsStatus(data){
+    this.inspections = this.inspections.map(inspect => {
+      if (inspect.id === data.id) {
+        inspect = data;
+      }
+      return inspect;
+    })
+    this.filteredInspections = this.inspections;
+    this.temporaryFilteredInspections = this.filteredInspections;
+  }
+  newSendValueInsStatusClose(data){
+    this.inspections = this.inspections.map(inspect => {
+      if (inspect.id === data.id) {
+        inspect = data;
+      }
+      return inspect;
+    })
+    this.filteredInspections = this.inspections;
+    this.temporaryFilteredInspections = this.filteredInspections;
   }
 }

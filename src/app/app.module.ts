@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgSelect2Module } from 'ng-select2';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +39,21 @@ import { ButtonSetBanComponent } from './components/button-set-ban/button-set-ba
 import { ButtonSetUnbanComponent } from './components/button-set-unban/button-set-unban.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
 import { InputComponent } from './components/input/input.component';
+import { MenuBarAdminComponent } from './components/menu-bar-admin/menu-bar-admin.component';
+import { AddDesciptionMemberComponent } from './components/add-desciption-member/add-desciption-member.component';
+import { ButtonSendReportComponent } from './components/button-send-report/button-send-report.component';
+import { ButtonEvaluateProgressComponent } from './components/button-evaluate-progress/button-evaluate-progress.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { ReportFormComponent } from './components/report-form/report-form.component';
+import { ButtonCloseCaseComponent } from './components/button-close-case/button-close-case.component';
+import { ButtonReOpenCaseComponent } from './button-re-open-case/button-re-open-case.component';
+import { HeaderLeaderComponent } from './header-leader/header-leader.component';
+import { HeaderMemberComponent } from './header-member/header-member.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { AddUserOwnerComponent } from './add-user-owner/add-user-owner.component';
+import { MenuBarLeaderComponent } from './components/menu-bar-leader/menu-bar-leader.component';
+import { AddUserLeaderComponent } from './pages/add-user-leader/add-user-leader.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +82,22 @@ import { InputComponent } from './components/input/input.component';
     ButtonSetBanComponent,
     ButtonSetUnbanComponent,
     InputSearchComponent,
-    InputComponent
+    InputComponent,
+    MenuBarAdminComponent,
+    AddDesciptionMemberComponent,
+    ButtonSendReportComponent,
+    ButtonEvaluateProgressComponent,
+    HeaderComponent,
+    AddUserComponent,
+    ReportFormComponent,
+    ButtonCloseCaseComponent,
+    ButtonReOpenCaseComponent,
+    HeaderLeaderComponent,
+    HeaderMemberComponent,
+    EditProfileComponent,
+    AddUserOwnerComponent,
+    MenuBarLeaderComponent,
+    AddUserLeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +112,7 @@ import { InputComponent } from './components/input/input.component';
     NgxPaginationModule,
     NgSelectModule,
     NgSelect2Module,
+    NgbModule,
     ModalModule.forRoot(),
     SweetAlert2Module.forRoot()
   ],
