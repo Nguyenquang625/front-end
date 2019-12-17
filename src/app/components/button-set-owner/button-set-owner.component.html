@@ -1,0 +1,12 @@
+<swal
+  #setOwnerItemSwal
+  title="Confirm set Owner!"
+  text="Are you sure you want to set {{member.name}} as Owner?"
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="handleRefusalToSetEmail($event)"
+  (confirm)="setOwner(member)"
+>
+</swal>
+<button [swal]="setOwnerItemSwal" class="btn btn-success btn-xs"><i class="fas fa-book-reader"></i></button>

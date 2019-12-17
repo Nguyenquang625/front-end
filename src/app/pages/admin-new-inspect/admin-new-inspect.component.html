@@ -1,0 +1,163 @@
+<div>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="logo">
+                    <img src='../../../assets/image/companylogo.png' class="company-logo" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="intro">
+                    <h1>Welcome, {{name}}</h1>
+                    <button (click)="logout()">logout</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <app-menu-bar-admin></app-menu-bar-admin>
+</div>
+<div class="modal-header">
+  <h5 class="modal-title pull-left">Form {{typeModal}} Inspection</h5>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="newInsForm" (ngSubmit) = "submitCreate()">
+    <div class="row">
+      <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Title</label>
+      <div class="col-sm-12">
+        <div class="form-group">
+
+          <input type="text" formControlName="title" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Line Location</label>
+      <div class="col-sm-12">
+        <div class="form-group">
+
+          <input type="text" formControlName="line_location" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Line Condition</label>
+      <div class="col-sm-12">
+        <div class="form-group">
+
+          <input type="text" formControlName="line_condition" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Description</label>
+      <div class="col-sm-12">
+        <div class="form-group">
+
+          <textarea type="text" formControlName="description" style="width: 100%;height: 150px;"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Equipment Require</label>
+      <div class="col-sm-12">
+        <div class="form-group">
+
+          <textarea type="text" formControlName="equipment_require" style="width: 100%;height: 150px;"></textarea>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <label>Start Date</label>
+        <div class="form-group">
+          <input
+            class="form-control"
+            formControlName="start_date"
+            type="date"
+            max="{{ newInsForm.value.endDate }}"
+          />
+          <label
+            *ngIf="newInsForm.controls['start_date'].invalid && newInsForm.controls['start_date'].touched"
+            id="start_date"
+            class="content-error"
+            for="start_date"
+          >This Start Date is required.
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label>End Date</label>
+        <div class="form-group">
+          <input
+            class="form-control"
+            formControlName="end_date"
+            type="date"
+            number="true"
+            min="{{ newInsForm.value.start_date }}"
+          />
+          <label
+            *ngIf="newInsForm.controls['end_date'].invalid  && newInsForm.controls['end_date'].touched"
+            id="end_date"
+            class="content-error"
+            for="end_date"
+          >This End Date is required.
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div class="row">
+        <label class="col-sm-6 col-form-label">Status</label>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <select class="form-control" formControlName="status">
+              <option *ngFor =  "let status of statuses" value={{status.id}}>{{status.type}}</option>
+            </select>
+  
+            <label *ngIf="newInsForm.controls['status'].invalid && newInsForm.controls['status'].touched"
+              class="content-error">This Type Request is required.
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <label class="col-sm-6 col-form-label">Team</label>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <select class="form-control" formControlName="team_id">
+                <option *ngFor =  "let team of teams" value={{team.id}}>{{team.subarea}}</option>
+              </select>
+    
+              <label *ngIf="newInsForm.controls['team_id'].invalid && newInsForm.controls['team_id'].touched"
+                class="content-error">This Type Request is required.
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 col-form-label">Owner</label>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <select class="form-control" formControlName="owner_id">
+                  <option *ngFor =  "let owner of owners" value={{owner.id}}>{{owner.owner.name}}</option>
+                </select>
+      
+                <label *ngIf="newInsForm.controls['owner_id'].invalid && newInsForm.controls['owner_id'].touched"
+                  class="content-error">This Type Request is required.
+                </label>
+              </div>
+            </div>
+          </div>
+    <button type="submit" class="btn btn-info">Update</button>
+  </form>
+</div>

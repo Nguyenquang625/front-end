@@ -1,0 +1,16 @@
+<app-header></app-header>
+<app-menu-bar-admin></app-menu-bar-admin>
+<div>
+    <app-member-list
+    [members] ='temporaryFilteredMembers'
+    (sendValueMember) = 'updateMemberList($event)'
+    (sendValueSetAdmin) = 'setAdmin($event)'
+    (sendValueSetOwner) = 'setOwner($event)'
+    (sendValueSetMember) = 'setMember($event)'
+    (sendValueSetBan) = 'setBan($event)'
+    (sendValueSetUnban) = 'setUnban($event)'
+    (sendNameValue) = 'onChangeName($event)'
+    (sendTeamIDValue) = 'onChangeTeamID($event)'
+    (sendLevelValue) = 'onChangeLevel($event)'
+    ></app-member-list>
+</div>

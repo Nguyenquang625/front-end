@@ -1,0 +1,89 @@
+<div class="card regular-table-with-color" style="min-width: 820px;">
+  <div class="card-header ">
+    <h4 class="card-title">List</h4>
+  </div>
+  <div class="row">
+    <div class="col-3 card-header">
+      <app-input-search type="text" [placeholder]="'Search title...'" (valueChange)="filterByTitle($event)">
+      </app-input-search>
+    </div>
+    <div class="col-3 card-header">
+      <app-input-search type="text" [placeholder]="'Search Line Location...'" (valueChange)="filterByLineLocation($event)">
+      </app-input-search>
+    </div>
+    <div class="col-2 card-header">
+      <app-input-search type="text" [placeholder]="'Search Line Condition...'" (valueChange)="filterByLineCondition($event)">
+      </app-input-search>
+    </div>
+
+    <div class="col-2 card-header">
+      <app-input [data]="searchTeams" title="Team" (sendTitleSearch)="filterTeam($event)"></app-input>
+    </div>
+    <div class="col-2 card-header">
+      <app-input [data]="searchStatus" title="Status" (sendTitleSearch)="filterByStatus($event)"></app-input>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th width='100px'>Title</th>
+          <th width='200px'>Line Location</th>
+          <th width='200px'>Line Condition</th>
+          <th width='200px'>description</th>
+          <th width='200px'>Equipment Required</th>
+          <th>Undertake team</th>
+          <th>Start/End Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let inspection of (inspections | paginate: { id: 'inspectionList', itemsPerPage: 3, currentPage: page })">
+          <td>{{inspection.id}}</td>
+          <td>
+            <app-report-form
+            typeModal = 'openReport'
+            [inspection] = 'inspection'
+            (SendValueInsStatus) = 'newSendValueInsStatus($event)'
+            (sendValueInsStatusClose) = 'newSendValueInsStatusClose($event)'
+            ></app-report-form>
+          </td>
+          <td>{{inspection.line_location}}</td>
+          <td>{{inspection.line_condition}}</td>
+          <td>{{inspection.description}}</td>
+          <td>{{inspection.equipment_require}}</td>
+          <td>
+            <div *ngFor='let tm of teams'>
+              <div *ngIf='inspection.team_id ==tm.id ; else error_team_content'>
+                {{tm.subarea}}
+              </div>
+            </div>
+
+          </td>
+          <td>{{inspection.start_date | date:'MMMM dd, yyyy' }} - {{inspection.end_date | date:'MMMM dd, yyyy' }}</td>
+
+          <td>
+            <div *ngFor='let sts of statuses'>
+              <div *ngIf='inspection.status == sts.id'>{{sts.type}}
+                <app-inspect-edit typeModal='update' [inspection]='inspection'
+                  (sendValue)='sendValueInpectUpdate($event)'></app-inspect-edit>
+                <app-button-delete [inspection]='inspection' (sendValueDelete)='sendValueInpectDelete($event)'>
+                </app-button-delete>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+        <tr *ngIf="!inspections.length">
+          <td class="text-center" colspan="6">None data</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!!inspections.length" class="col-md-12 container">
+    <pagination-controls id="inspectionList" (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<app-header></app-header>
+<app-menu-bar-admin></app-menu-bar-admin>
+<div class="modal-body">
+    <form [formGroup]="newUserForm" (ngSubmit)="submitCreate()">
+        <div class="row">
+            <label class="col-sm-3 col-form-label message-note"
+                style="font-size: 15px; font-weight: bold">UserName</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <input type="text" formControlName="username" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-3 col-form-label message-note"
+                style="font-size: 15px; font-weight: bold">Password</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <input type="password" formControlName="password" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Re-enter
+                password</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <input type="password" formControlName="re_password" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Full name</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <input type="text" formControlName="name" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-3 col-form-label message-note"
+                style="font-size: 15px; font-weight: bold">Address</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <input type="text" formControlName="adress"
+                        style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Phone
+                number</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <input type="text" formControlName="phone_number"
+                        style="width: 100%">
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row">
+            <label class="col-sm-6 col-form-label">Gender</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <select class="form-control" formControlName="gender">
+                        <option value='male'>Male</option>
+                        <option value='female'>Female</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">Email
+                address</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+
+                    <input type="text" formControlName="mail"
+                        style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 col-form-label">Level</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <select class="form-control" formControlName="level">
+                        <option *ngFor="let level of levels" value="{{level}}">
+                            <span *ngIf="level === 1">Normal Member</span>
+                            <span *ngIf="level === 2">Owner</span>
+                            <span *ngIf="level === 3">Admin</span>
+                        </option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 col-form-label">Team</label>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <select class="form-control" formControlName="team_id">
+                        <option *ngFor="let team of teams" value={{team.id}}>{{team.subarea}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-info" [disabled]= '!newUserForm.valid'>Submit</button>
+    </form>
+</div>

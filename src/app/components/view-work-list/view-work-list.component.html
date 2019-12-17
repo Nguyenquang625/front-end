@@ -1,0 +1,73 @@
+<a *ngIf="typeModal === 'viewworks'"  (click)='openModal(template)'>
+    
+    <span class="view-work">{{listInspection.title}}</span>
+</a>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">Table {{typeModal}} </h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <app-button-send-report
+            [data] = 'worksDetails'
+            [inspection] = 'listInspection'
+            ></app-button-send-report>
+        </div>
+        <div class="card regular-table-with-color">
+            <div class="card-header ">
+                <h4 class="card-title">List</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>In charge</th>
+                            <th>progress</th>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let worksDetail of (worksDetails | paginate: { id: 'workList', itemsPerPage: 4, currentPage: page })">
+                            <td>{{worksDetail.id}}</td>
+                            <td>{{worksDetail.title}}</td>
+                            <td>{{worksDetail.description}}</td>
+                            <td>
+                                <div *ngFor="let member of members">
+                                    <div *ngIf="worksDetail.user_id === member.id">{{member.name}}</div>
+                                </div>
+                            </td>
+                            <td>
+                                <!-- <p><ngb-progressbar [showValue]="true" type="info" [value]="50"></ngb-progressbar></p> -->
+                                <div class="wrap-progress">
+                                    <div class="progress" >
+                                        <div class ="bar" [ngStyle]="{'width.%': worksDetail.progress}"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <app-button-evaluate-progress
+                                typeModal = 'evaluate'
+                                [worksDetail] = 'worksDetail'
+                                (sendValueAdjustProgress) = 'editWorkDetails($event)'
+                                ></app-button-evaluate-progress>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!worksDetails">
+                            <td class="text-center" colspan="6">None data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="!!worksDetails.length" class="col-md-12 container">
+                <pagination-controls id="workList" (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</ng-template>

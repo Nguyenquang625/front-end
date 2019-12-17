@@ -1,0 +1,83 @@
+<div class="card regular-table-with-color">
+    <div class="card-header ">
+        <h4 class="card-title">List member</h4>
+    </div>
+    <div class="row">
+        <div class="col-1 card-header">
+        </div>
+        <div class="col-3 card-header">
+            <app-input-search type="text" [placeholder]="'Search Name...'" (valueChange)="filterByName($event)">
+            </app-input-search>
+        </div>
+
+        <div class="col-1 card-header">
+        </div>
+        <div class="col-2 card-header">
+            <app-input [data]="searchLevel" title="Level" (sendTitleSearch)="filterByLevel($event)"></app-input>
+        </div>
+        <div class="col-2 card-header">
+            <app-input [data]="searchTeams" title="Team" (sendTitleSearch)="filterTeam($event)"></app-input>
+        </div>
+        <div class="col-3 card-header">
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Team</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let member of (members | paginate: { id: 'memberList', itemsPerPage: 5, currentPage: page })">
+                    <td>{{member.id}}</td>
+                    <td>
+                        <app-edit-profile
+                        typeModal ='editProfile'
+                        [member] ='member'
+                        (sendValueMemberChange) = 'newSendValueMemberChange($event)'
+                        >
+                        </app-edit-profile>
+                    </td>
+                    <td *ngIf="member.level === 0">This user is currently banned</td>
+                    <td *ngIf="member.level === 1">Member</td>
+                    <td *ngIf="member.level === 2">Owner</td>
+                    <td *ngIf="member.level === 3">Admin</td>
+                    <td>
+                        <span *ngFor="let team of teams">
+                            <span *ngIf="team.id === member.team_id">{{team.subarea}}</span>
+                        </span>
+                    </td>
+                    <td>
+                        <app-button-set-admin [member]='member' (sendValueSetAdmin)='newSendValueSetAdmin($event)'>
+                        </app-button-set-admin>
+                        <app-button-set-owner [member]='member' (sendValueSetOwner)='newSendValueSetOwner($event)'>
+                        </app-button-set-owner>
+                        <app-button-set-member [member]='member' (sendValueSetMember)='newSendValueSetMember($event)'>
+                        </app-button-set-member>
+                        <br>
+                        <app-button-set-unban *ngIf="member.level === 0; else setBan" [member]='member'
+                            (sendValueUnban)='newSendValueUnban($event)'></app-button-set-unban>
+                        <ng-template #setBan>
+                            <app-button-set-ban [member]='member' (sendValueBan)='newSendValueBan($event)'>
+                            </app-button-set-ban>
+                        </ng-template>
+
+                    </td>
+                </tr>
+                <tr *ngIf="!members.length">
+                    <td class="text-center" colspan="6">None data</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="!!members.length" class="col-md-12 container">
+        <pagination-controls id="memberList" (pageChange)="page = $event"></pagination-controls>
+    </div>
+</div>

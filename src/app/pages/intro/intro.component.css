@@ -1,0 +1,26 @@
+.home{
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.home img{
+	display: inline-block;
+}
+.home h2{
+    
+}
+.home p a{
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    background: #48616D;
+    padding: 5px 10px;
+    border-radius: 3px
+}
+.home p a :hover{
+    cursor: pointer;
+}

@@ -1,0 +1,29 @@
+.row{
+    background-color: aquamarine;
+}
+.col-md-6{
+    right: 0px;
+    text-align: center;
+    margin-top: 17px;
+}
+.intro h1{
+    display: inline-block;
+    font-size: 23px;
+    color: white;
+    font-weight: bold  
+}
+.intro button{
+    display: inline-block;
+    background-color:aquamarine; 
+    border-radius: 5px;
+    border: 1px solid white;
+    color: aliceblue;
+    font-weight: bold ;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+.logo img{
+    width: 81px;
+    height: 65px;
+    margin: 5px;
+}

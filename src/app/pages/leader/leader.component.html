@@ -1,0 +1,29 @@
+<div>
+    <app-header></app-header>
+    <app-menu-bar-leader></app-menu-bar-leader>
+    <!-- <div>
+        <a (click)='moveToMemberChat()'>Chat work</a>
+    </div>
+    <div>
+        <button (click)="checkedNotify()" class="notification">
+            <span>Notification</span>
+            <span *ngIf="notification.length !== 0" class="badge">{{ notification.length }}</span>
+        </button>
+
+        <div class="col-4" [ngbCollapse]="isChecked">
+            <div *ngFor="let notify of notification" class="card">
+                <a class="card-body">
+                    <span>{{notify.id}}</span><br>
+                    <span>{{notify.data}}</span>
+                </a>
+            </div>
+        </div>
+    </div> -->
+
+    <app-inspect-list-leader 
+    [listInspections]='listInspections'
+    (sendTitleValue) ='onChangeTitle($event)'
+    (sendLineLocationValue) ='onChangeLineLocation($event)'
+    (sendLineConditionValue) ='onChangeLineCondition($event)'
+    ></app-inspect-list-leader>
+</div>

@@ -1,0 +1,67 @@
+<a *ngIf="typeModal === 'editProfile'" (click)='openModal(template)'>
+    <span style="color: #436594;cursor: pointer;">{{member.name}}</span>
+</a>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">Edit {{member.name}} Profile</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="memberInfoForm" (ngSubmit)="submitEdit()">
+
+            <div class="row">
+                <label class="col-sm-6 col-form-label"> Full Name</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" formControlName="name"
+                            style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Username</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" formControlName="username"
+                            style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Adress</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" formControlName="adress"
+                            style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Email</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" formControlName="mail"
+                            style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Team</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <select class="form-control" formControlName="team_id">
+                          <option *ngFor="let team of teams" value={{team.id}}>{{team.subarea}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info" [disabled]= '!memberInfoForm.valid'>Submit Edit</button>
+        </form>
+    </div>
+</ng-template>

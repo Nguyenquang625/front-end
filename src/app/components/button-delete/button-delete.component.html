@@ -1,0 +1,12 @@
+<swal
+  #deleteItemSwal
+  title="Confirm delete {{ inspection.title }}"
+  text="Are you sure you want to delete this item?"
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="handleRefusalToSetEmail($event)"
+  (confirm)="deleteItem(inspection)"
+>
+</swal>
+<button [swal]="deleteItemSwal" class="btn btn-danger btn-link btn-xs"><i class="fa fa-times"></i></button>

@@ -1,0 +1,36 @@
+<button *ngIf="typeModal === 'evaluate'" class="btn btn-warning" (click)='openModal(template)'>
+    Evaluate
+</button>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">Form {{typeModal}}</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formProgress" (ngSubmit)="submitAdjust()">
+            <div class="row">
+                <label class="col-sm-12 col-form-label message-note"
+                    style="font-size: 15px; font-weight: bold">{{worksDetail.title}}</label>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Assign</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <select class="form-control select-op" 
+                        
+                        formControlName="progress">
+                            <option *ngFor="let number of numbers" value="{{number}}">
+                                <p style="display: inline-block;">{{number}}%</p>
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info"  [disabled]= '!formProgress.valid'>Save</button>
+        </form>
+    </div>
+</ng-template>

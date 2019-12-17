@@ -1,0 +1,43 @@
+<a *ngIf="typeModal === 'insert'" class="add-work" (click)='openModal(template)'>
+    <i class="fas fa-plus-circle"></i>
+</a>
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">Form {{typeModal}}</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="workDetailForm" (ngSubmit)="submitInsert()">
+                <div class="row">
+                        <label class="col-sm-3 col-form-label message-note" style="font-size: 15px; font-weight: bold">title</label>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                
+                            <input type="text" formControlName="title" style="width: 100%;">
+                          </div>
+                        </div>
+                </div>
+                
+                <div class="row">
+                        <label class="col-sm-6 col-form-label">Assign</label>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <select class="form-control" formControlName="user_id">
+                              <option *ngFor="let member of members" value={{member.id}}>
+                                <p style="display: inline-block;">{{member.name}}</p>
+                              </option>
+                            </select>
+                
+                            <label *ngIf="workDetailForm.controls['user_id'].invalid && workDetailForm.controls['user_id'].touched"
+                              class="content-error">This Type Request is required.
+                            </label>
+                          </div>
+                        </div>
+                </div>
+                
+            <button type="submit" class="btn btn-info">Add</button>
+        </form>
+    </div>
+</ng-template>

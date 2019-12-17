@@ -1,0 +1,12 @@
+<swal
+  #sendReportSwal
+  title="Confirm"
+  text="Are you sure you want submit new report?"
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="handleRefusalToSetEmail($event)"
+  (confirm)="sendReport()"
+>
+</swal>
+<button [swal]="sendReportSwal" class="btn btn-danger btn-link btn-xs">Send Report</button>
