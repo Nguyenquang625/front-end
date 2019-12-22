@@ -30,7 +30,7 @@ export class ViewWorkListComponent implements OnInit {
     this.modalRef = this.modalService.show(template,{class : 'modal-lg'});
   }
   getWorkDetails(){
-    if(!!this.listInspection.id){
+    if(!!this.listInspection){
       const body = {
         inspection_id : this.listInspection.id
       };

@@ -1,6 +1,6 @@
 <a *ngIf="typeModal === 'viewworks'"  (click)='openModal(template)'>
     
-    <span class="view-work">{{listInspection.title}}</span>
+    <span class="view-work">{{listInspection ? listInspection.title : ''}}</span>
 </a>
 <ng-template #template>
     <div class="modal-header">

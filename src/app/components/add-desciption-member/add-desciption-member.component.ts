@@ -47,19 +47,20 @@ export class AddDesciptionMemberComponent implements OnInit {
     const body ={
       id: this.workDetail.id,
       description :this.workDetailForm.value.description,
+      workDetail : this.workDetail,
       token : localStorage.getItem('token')
     }
     SocketService.emit('workNotify', body);
-    // this.memberService.editWorkDetail(body).subscribe(data=>{
-    //   if(data.message === 'success'){
-    //     this.workDetail = data.data[0];
-    //     this.toastr.success(data.message);
-    //     this.modalRef.hide();
-    //     return this.sendValueWorkDetail.emit(this.workDetail);
-    //   }
-    //   else{
-    //     this.toastr.error(data.message);
-    //   }
-    // })
+    this.memberService.editWorkDetail(body).subscribe(data=>{
+      if(data.message === 'success'){
+        this.workDetail = data.data[0];
+        this.toastr.success(data.message);
+        this.modalRef.hide();
+        return this.sendValueWorkDetail.emit(this.workDetail);
+      }
+      else{
+        this.toastr.error(data.message);
+      }
+    })
   }
 }

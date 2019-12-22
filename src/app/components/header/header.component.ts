@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import SocketService from 'src/app/services/socketService';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +8,12 @@ import SocketService from 'src/app/services/socketService';
 })
 export class HeaderComponent implements OnInit {
   name : string;
-  socket = SocketService.socket;
-  token = localStorage.getItem('token');;
+  token = localStorage.getItem('token');
   constructor(
     private router : Router
   ) { }
 
   ngOnInit() {
-    SocketService.emit('updateSocketId', this.token);
     this.checkLogin();
     this.name = localStorage.getItem('name');
   }

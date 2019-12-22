@@ -86,6 +86,7 @@ export class SetLevelComponent implements OnInit {
     })
   }
   setMember($event){
+    console.log($event);
     this.adminService.setMember($event).subscribe(data=>{
       if(data.message === 'set_member_success'){
         this.members.map( member => {

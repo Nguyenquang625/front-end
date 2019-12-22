@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class InputSearchComponent implements OnInit {
   @Input()
     get value() {
-        return this.inputValue;
+    return this.inputValue;
   }
   
   @Input() placeholder: string = '';

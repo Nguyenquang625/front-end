@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LeaderService } from 'src/app/services/LeaderSevice';
 import { ToastrService } from 'ngx-toastr';
+import { ExcelExportService } from 'src/app/services/Excel-ExportService';
 
 @Component({
   selector: 'app-button-send-report',
@@ -12,7 +13,8 @@ export class ButtonSendReportComponent implements OnInit {
   @Input() inspection: any ;
   constructor(
     private leaderService : LeaderService,
-    private toastr : ToastrService
+    private toastr : ToastrService,
+    private excelExportService : ExcelExportService
   ) { }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class ButtonSendReportComponent implements OnInit {
     }
     this.leaderService.sendReport(body).subscribe(data=>{
       if(data.message === 'report_sent'){
+        this.excelExportService.exportAsExcelFile(this.data, 'Excel');
         this.toastr.success(data.message);
       }else{
         this.toastr.error(data.message);

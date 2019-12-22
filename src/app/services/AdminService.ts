@@ -109,4 +109,15 @@ export class AdminService {
       headers: this.setHeaders()
     });
   }
+  addchat(body): Observable<any> {
+    return this.http.post(`${environment.API_SERVER_URL}/admin/addchat`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  getChatLog(getInfo): Observable<any> {
+    const query = `id=${getInfo.user.id}`;
+    return this.http.get(`${environment.API_SERVER_URL}/admin/getchatlog?${query}`, {
+      headers: this.setHeaders()
+    });
+  }
 }
