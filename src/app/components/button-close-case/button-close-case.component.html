@@ -8,7 +8,8 @@
   (cancel)="handleRefusalToSetEmail($event)"
   (confirm)="closeInspection(inspection)"
 >
-</swal><swal
+</swal>
+<swal
 #reOpenInspectionSwal
 title="Confirm reopen {{ inspection.title }}"
 text="Are you sure you want to reopen this case?"
@@ -19,5 +20,5 @@ type="warning"
 (confirm)="reOpenInspection(inspection)"
 >
 </swal>
-<button [swal]="closeInspectionSwal" class="btn btn-danger btn-link btn-xs">Close Case</button>
-<button [swal]="reOpenInspectionSwal" class="btn btn-danger btn-link btn-xs">Reopen Case</button>
+<button [swal]="closeInspectionSwal" class="btn btn-danger btn-link btn-xs">Close</button>
+<button [swal]="reOpenInspectionSwal" class="btn btn-danger btn-link btn-xs">Reopen</button>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MemberService } from 'src/app/services/MemberService';
+import SocketService from 'src/app/services/socketService';
 
 @Component({
   selector: 'app-member',
@@ -10,12 +11,15 @@ import { MemberService } from 'src/app/services/MemberService';
 export class MemberComponent implements OnInit {
   workDetails : any = [];
   inspections : any = [];
+  socket = SocketService.socket;
+  token = localStorage.getItem('token');
   constructor(
     private router : Router,
     private memberService : MemberService
   ) { }
 
   ngOnInit() {
+    SocketService.emit('updateSocketId', this.token);
     this.checkAuth();
     this.getWorkdetails();
     this.getInspections();
@@ -61,10 +65,5 @@ export class MemberComponent implements OnInit {
     const body ={
       data : dataJson,
     }
-    this.memberService.addWorkNotify(body).subscribe(data2=>{
-      if(data2.message==='notification_added'){
-        console.log(data2);
-      }
-    })
   }
 }

@@ -1,0 +1,7 @@
+<a (click) = 'setChecked()' class="card-body">
+    <span>{{notify.id}}. An user has added description to : </span><br>
+    <app-view-work-list
+    typeModal = 'viewworks'
+    [listInspection] = 'inspection'
+    ></app-view-work-list>
+</a>

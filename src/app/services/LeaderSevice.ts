@@ -67,4 +67,30 @@ export class LeaderService {
       headers: this.setHeaders()
     });
   }
+  getInspectionById(getID): Observable<any> {
+    const query = `id=${getID.id}`;
+    return this.http.get(`${environment.API_SERVER_URL}/owner/getinspectionbyid?${query}`, {
+      headers: this.setHeaders()
+    });
+  }
+  checkedNoti(body): Observable<any> {
+    return this.http.put(`${environment.API_SERVER_URL}/owner/checkednoti`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  getAdminSocketID(): Observable<any> {
+    return this.http.get(`${environment.API_SERVER_URL}/owner/getadminsocketid`, {
+      headers: this.setHeaders()
+    });
+  }
+  addChat(body): Observable<any> {
+    return this.http.post(`${environment.API_SERVER_URL}/owner/addchat`,body, {
+      headers: this.setHeaders()
+    });
+  }
+  getChatLog(): Observable<any> {
+    return this.http.get(`${environment.API_SERVER_URL}/owner/getchatlog`, {
+      headers: this.setHeaders()
+    });
+  }
 }

@@ -1,24 +1,42 @@
 <div>
-    <app-header></app-header>
-    <app-menu-bar-leader></app-menu-bar-leader>
-    <!-- <div>
-        <a (click)='moveToMemberChat()'>Chat work</a>
-    </div>
     <div>
-        <button (click)="checkedNotify()" class="notification">
-            <span>Notification</span>
-            <span *ngIf="notification.length !== 0" class="badge">{{ notification.length }}</span>
+        <div class="header">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <img src='../../../assets/image/companylogo.png' class="company-logo" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="intro">
+                        <h1>Welcome, {{name}}</h1>
+                        <button (click)="logout()">logout</button>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    <app-menu-bar-leader></app-menu-bar-leader>
+    <div>
+        <button (click)="checkedNotify()" class="btn btn-info notification">
+            <span>Notification </span>
+            <span *ngIf="lengthNoti !== 0" class="badge" style="background-color: #FA3E3E;padding: 5px 7px;border-radius: 12px;">
+                <span style="color: white;">
+                    {{lengthNoti}}
+                </span >
+            </span>
         </button>
 
-        <div class="col-4" [ngbCollapse]="isChecked">
+        <div class="col-4" (click) = "checkedNotify()" [ngbCollapse]="isChecked">
             <div *ngFor="let notify of notification" class="card">
-                <a class="card-body">
-                    <span>{{notify.id}}</span><br>
-                    <span>{{notify.data}}</span>
-                </a>
+                <app-notify-link
+                [notify] = 'notify'
+                (sendNotifyValue) = 'resetNotify($event)'
+                ></app-notify-link>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <app-inspect-list-leader 
     [listInspections]='listInspections'
@@ -26,4 +44,57 @@
     (sendLineLocationValue) ='onChangeLineLocation($event)'
     (sendLineConditionValue) ='onChangeLineCondition($event)'
     ></app-inspect-list-leader>
+
+    <div class="chat-icons-click" (click) = 'openAndConnectAdmin()'>
+        <i class="fas fa-comments fa-2x"></i>
+    </div>
+
+    <div class="chat-box" [ngbCollapse]="openChatLog">
+        <div class="container">
+            <div class="msg-header">
+                <div class="active">
+                    <h4>{{Admin ? Admin.name : ''}}</h4>
+                </div>
+                <div class="header-icons">
+                    <i class="far fa-window-close"></i>
+                </div>
+            </div>
+            <div class="chat-page">
+                <div class="msg-inbox">
+                    <div class="chats">
+
+                        <div class="msg-page" >
+                            <div *ngFor="let chatLog of chatlogs">
+                                <div class="received-chat"  *ngIf="chatLog.user_id !== chatLogMainUserId">
+                                    <div class="received-msg">
+                                        <div class="received-msg-inbox">
+                                            <p>{{chatLog.chatlog}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sent-chat" *ngIf="chatLog.user_id === chatLogMainUserId">
+                                        <div class="sent-msg">
+                                            <p>{{chatLog.chatlog}}</p>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="msg-bottom">
+                    <div class="input-group">
+                        <input type="text" class="form-control" #textInput placeholder="write message">
+                        <div class="input-group-append">
+                            <div class="input-group-text" (click)= 'sendChat()'>
+                                <i class="fa fa-paper-plane"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

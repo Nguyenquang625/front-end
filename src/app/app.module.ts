@@ -54,6 +54,10 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { AddUserOwnerComponent } from './add-user-owner/add-user-owner.component';
 import { MenuBarLeaderComponent } from './components/menu-bar-leader/menu-bar-leader.component';
 import { AddUserLeaderComponent } from './pages/add-user-leader/add-user-leader.component';
+import { NotifyLinkComponent } from './components/notify-link/notify-link.component';
+import { ChatAdminComponent } from './components/chat-admin/chat-admin.component';
+import { ChatLeaderComponent } from './components/chat-leader/chat-leader.component';
+import { ChatBodyComponent } from './components/chat-body/chat-body.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +101,11 @@ import { AddUserLeaderComponent } from './pages/add-user-leader/add-user-leader.
     EditProfileComponent,
     AddUserOwnerComponent,
     MenuBarLeaderComponent,
-    AddUserLeaderComponent
+    AddUserLeaderComponent,
+    NotifyLinkComponent,
+    ChatAdminComponent,
+    ChatLeaderComponent,
+    ChatBodyComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,40 @@
+.msg-page{
+    height: 250px;
+    overflow-y: auto;
+  }
+  .received-msg{
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+    margin-bottom: 10px;
+  }
+  .received-msg-inbox{
+    width: 70%;
+  }
+  .received-msg-inbox p{
+    background: #efefef none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #646464;
+    font-size: 13px;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+  }
+  .sent-chat{
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .sent-msg p{
+    background: #007bff none repeat scroll 0 0;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 13px;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+  }
+  .sent-msg {
+    float: left;
+    width: 70%;
+    margin-left: 30%;
+  }

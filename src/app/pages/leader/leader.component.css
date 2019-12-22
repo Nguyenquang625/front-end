@@ -69,3 +69,136 @@
   /* Change color of dropdown links on hover */
   .dropdown-content a:hover {background-color: #ddd}
   
+
+
+.chat-icons-click{
+  position: fixed;
+  bottom: 0;
+  right: 280px;
+  background-color: #007bff;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.chat-icons-click .fas{
+  color: #fff;
+}
+
+
+
+.chat-box{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.container{
+  max-width: 280px !important;
+  margin: auto;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
+}
+.img{
+  max-width: 100%;
+}
+.msg-header{
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 10%;
+  border-bottom: none;
+  display: inline-block;
+  background-color: #007bff;
+}
+.active{
+  width: 120px;
+  float: left;
+  margin-top: 10px;
+}
+.active h4{
+  font-size: 13px;
+  margin-left: 15px;
+  color: #fff;
+
+}
+.header-icons{
+  float: right;
+  margin-right: 10px;
+}
+.header-icons .far{
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+}
+.header-icons .fas{
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+}
+.msg-inbox{
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding-bottom: 30px;
+  background-color: #FFFFFF;
+}
+.chats{
+  padding: 10px 10px 0 10px;
+}
+.msg-page{
+  height: 250px;
+  overflow-y: auto;
+}
+.received-msg{
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+  margin-bottom: 10px;
+}
+.received-msg-inbox{
+  width: 70%;
+}
+.received-msg-inbox p{
+  background: #efefef none repeat scroll 0 0;
+  border-radius: 10px;
+  color: #646464;
+  font-size: 13px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+.sent-chat{
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.sent-msg p{
+  background: #007bff none repeat scroll 0 0;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 13px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+.sent-msg {
+  float: left;
+  width: 70%;
+  margin-left: 30%;
+}
+.msg-bottom{
+  position: relative;
+  height: 36px;
+  background-color: #007bff;
+}
+.input-group{
+  float: right;
+  outline: none !important;
+  border-radius: 20px;
+  background-color: #fff;
+}
+.form-control{ 
+  border: none !important;
+  border-radius: 20px !important;
+}
+.input-group-text{
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+}
